@@ -14,7 +14,7 @@ export class Server extends EventEmitter {
    * Constructor
    * @param {number} port Número de puerto
    */
-  constructor(private port: number) {
+  constructor(private readonly port: number) {
     super();
   }
 
@@ -89,7 +89,3 @@ export class Server extends EventEmitter {
     });
   }
 }
-
-
-// const servidor = new Server(60300);
-// servidor.run();

@@ -8,7 +8,7 @@ export class Note {
    * @param color Color de la Nota
    * @param body Contenido de la Nota
    */
-  constructor(private name: string, private color: string, private body: string) {}
+  constructor(private readonly name: string, private readonly color: string, private readonly body: string) {}
 
   /**
    * Getter del título de la nota

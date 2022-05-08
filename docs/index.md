@@ -1,10 +1,6 @@
 # Práctica 11 - Cliente y servidor para una aplicación de procesamiento de notas de texto
 ### [Git Pages](https://ull-esit-inf-dsi-2122.github.io/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/).
 
-### DATOS:
-nombre:
-correo:
-<!-- mejor en el readme? -->
 
 ## Índice
 - [Introducción](#id1)
@@ -14,7 +10,7 @@ correo:
   - [Clase Client](#id5)
 - [App cliente](#id6)
 - [App servidor](#id7)
-- [Conclusión](#id8)
+- [Funcionamiento](#id8)
 - [Referencias](#id9)
 
 
@@ -22,9 +18,9 @@ correo:
 En esta práctica, se implementará un servidor y cliente para escribir un servidor y un cliente haciendo uso de los sockets proporcionados por el módulo net de Node.js. Para ello, se partirá de la práctica 9 de procesamiento de notas.
 ## Clases <a name="id2"></a>
 ### Clase User <a name="id3"></a>
-Esta clase de la práctica 9, sólo se han modificado el valor de retorno de las todas las funciones que permiten: añadir, modificar, eliminar, listar y leer notas de un usuario concreto. Dicha clase se define en [user.ts](). Este valor de retorno es un alias _ResponseType_, definido en el fichero [types.ts](). La cual, es una respuesta del servidor hacia la petición del cliente.
+Esta clase de la práctica 9, sólo se han modificado el valor de retorno de las todas las funciones que permiten: añadir, modificar, eliminar, listar y leer notas de un usuario concreto. Dicha clase se define en [user.ts](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/blob/97494e92e497bd581b5e8a26bc25b7838ff53f90/src/user.ts). Este valor de retorno es un alias _ResponseType_, definido en el fichero [types.ts](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/blob/97494e92e497bd581b5e8a26bc25b7838ff53f90/src/types.ts). La cual, es una respuesta del servidor hacia la petición del cliente.
 ### Clase Server <a name="id4"></a>
-Se define la clase Server en el fichero [serverClass](). Esta clase recibe como parámetro en su constructor el número de puerto, así pues facilita crear el socket y así el manejo de los eventos.
+Se define la clase Server en el fichero [serverClass](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/blob/97494e92e497bd581b5e8a26bc25b7838ff53f90/src/serverClass.ts). Esta clase recibe como parámetro en su constructor el número de puerto, así pues facilita crear el socket y así el manejo de los eventos.
 ```typescript
 constructor(private puerto: number) { super(); }
 ```
@@ -114,7 +110,7 @@ Cuando el método emita un evento _end_ debido a la invocación del método _end
 
 
 ### Clase Client <a name="id5"></a>
-Se define la clase Client en el fichero [clientClass](). Esta clase recibe como parámetro en su constructor el número de puerto.
+Se define la clase Client en el fichero [clientClass](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/blob/97494e92e497bd581b5e8a26bc25b7838ff53f90/src/clientClass.ts). Esta clase recibe como parámetro en su constructor el número de puerto.
 ```typescript
 constructor(private puerto: number) { super(); }
 ```
@@ -180,7 +176,7 @@ Primero, creamos el socket cliente con _connect_ del módulo net.
 Cuando el socket ejecute un evento del tipo end se parceará el dato entero leído cuando se produzca una evento de tipo _data_, y se emitirá un evento _request_ con el dato json. Cuando se emita el evento anteriormente mencionado, se procesará la respuesta del servidor.
 
 ## App cliente <a name="id6"></a>
-El programa principal del cliente, definido en el fichero [appClient.ts](), se enviará las peticiones del cliente al servidor. El siguiente ejemplo muestra la configuración de un comando:
+El programa principal del cliente, definido en el fichero [appClient.ts](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/blob/97494e92e497bd581b5e8a26bc25b7838ff53f90/src/appClient.ts), se enviará las peticiones del cliente al servidor. El siguiente ejemplo muestra la configuración de un comando:
 ```typescript
 yargs.command({
   command: 'add',
@@ -226,14 +222,68 @@ yargs.command({
 ```
 
 ## App servidor <a name="id7"></a>
-En [appServer.ts]() se ejecuta el método run() de la clase Server para la ejecución del servidor.
+En [appServer.ts](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348/blob/97494e92e497bd581b5e8a26bc25b7838ff53f90/src/appServer.ts) se ejecuta el método run() de la clase Server para la ejecución del servidor.
 ```typescript
 const servidor = new Server(60300);
 servidor.run();
 
 ```
 
-## Conclusión <a name="id8"></a>
+## Funcionamiento <a name="id8"></a>
+Servidor:
+```bash
+[~/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348(main)]$node dist/appServer.js 
+Esperando a que un cliente se conecte...
+Se ha conectado un cliente
+Numero de clientes conectados: 1
+Fin de datos de envío
+El fichero se ha creado
+El cliente se ha desconectado
+Se ha conectado un cliente
+Numero de clientes conectados: 1
+Fin de datos de envío
+El cliente se ha desconectado
+Se ha conectado un cliente
+Numero de clientes conectados: 1
+Fin de datos de envío
+Nota leida!
+Red note
+This is a red note
+El cliente se ha desconectado
+Se ha conectado un cliente
+Numero de clientes conectados: 1
+Fin de datos de envío
+Nota eliminada!
+El cliente se ha desconectado
+Se ha conectado un cliente
+Numero de clientes conectados: 1
+Fin de datos de envío
+Error: el fichero no existe
+El cliente se ha desconectado
+```
+
+Cliente:
+```bash
+[~/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348(main)]$node dist/appClient.js add --user="edusegre" --title="Red note" --body="This is a red note" --color="red"
+El fichero se ha creado
+Desconexión con el servidor
+[~/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348(main)]$node dist/appClient.js list --user="edusegre"
+Tus notas:
+Red note
+Yellow note
+Desconexión con el servidor
+[~/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348(main)]$node dist/appClient.js read --user="edusegre" --title="Red note"
+Nota leida!
+Red note
+This is a red note
+Desconexión con el servidor
+[~/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348(main)]$node dist/appClient.js remove --user="edusegre" --title="Red note"
+Nota eliminada!
+Desconexión con el servidor
+[~/ull-esit-inf-dsi-21-22-prct11-async-sockets-alu0101328348(main)]$node dist/appClient.js remove --user="edusegre" --title="Black note"
+Error: el fichero no existe
+Desconexión con el servidor
+```
 
 
 ## Referencias <a name="id9"></a>

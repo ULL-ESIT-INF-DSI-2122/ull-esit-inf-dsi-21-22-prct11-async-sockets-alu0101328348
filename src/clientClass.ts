@@ -12,7 +12,7 @@ export class Client extends EventEmitter {
    * Constructor
    * @param {number} port Número de puerto
    */
-  constructor(private port: number) {
+  constructor(private readonly port: number) {
     super();
   }
 
@@ -25,6 +25,7 @@ export class Client extends EventEmitter {
 
     let dataChunk = '';
     sockeCliente.on('data', (data) => {
+      console.log(data.toString());
       dataChunk += data;
     });
     // se procesa la respuesta

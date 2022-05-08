@@ -11,7 +11,7 @@ export class User {
    * Constructor para un objeto tipo Usuario
    * @param {string} name Nombre del usuario
    */
-  constructor(private name: string) {}
+  constructor(private readonly name: string) {}
 
   /**
    * Getter del nombre del usuario
@@ -136,7 +136,7 @@ export class User {
     const path: string = './src/notes/' + this.name;
     if (fs.existsSync(path)) {
       const ficheros = fs.readdirSync(path);
-      let datosJSON: any[] = [];
+      const datosJSON: any[] = [];
       ficheros.forEach((file) => {
         const readFile = fs.readFileSync(path + '/' + file);
         datosJSON.push(JSON.parse(readFile.toString()));
@@ -159,7 +159,7 @@ export class User {
   public checkColor(color: string): boolean {
     const colorList: string[] = ['red', 'green', 'blue', 'yellow'];
     for (let i = 0; i < colorList.length; i++) {
-      if (color == colorList[i]) {
+      if (color === colorList[i]) {
         return true;
       }
     }
