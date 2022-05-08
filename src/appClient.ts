@@ -59,13 +59,13 @@ yargs.command({
   command: 'remove',
   describe: 'remove a new note',
   builder: {
-    user: {
-      describe: 'User name',
+    title: {
+      describe: 'Note title',
       demandOption: true,
       type: 'string',
     },
-    title: {
-      describe: 'Note title',
+    user: {
+      describe: 'User name',
       demandOption: true,
       type: 'string',
     },
